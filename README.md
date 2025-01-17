@@ -54,13 +54,3 @@ Follow these steps to run the project:
    - Execute the `dw.sh` script to download the data in batches.
 3. Parse the downloaded data with `python3 parsexml.py`.
 4. Run the search engine with `python3 search.py` to test queries.
-
-### Example Command
-
-To search for "evolution of bacteria", run the following command:
-
-```bash
-python3 search.py "evolution of bacteria"
-```
-
-This will return the top 15 results ranked using the vector model.
