@@ -1,0 +1,82 @@
+q2.1 - la catégorie est : Biology
+q2.2/q2.3 - la sortie est un fichier intitulé "wiki.lst" qui contiend les titres des articles 
+        et des sous-catégories trouvés à partir de la catégorie Category:Biology jusqu'à une p
+        rofondeur de 2 niveaux.
+        l'affichage : ligne par ligne
+        wiki.lst > dans le rep TPWEBCRAWLING
+
+*==================================================================================================*
+q3.1 - il y a 3000 pages/batch
+q3.2 - l'api wikipedia utilisé est : L'outil HTTP (Le chercher la doc) Special:Export
+q3.3 - Étape de crawling implémenté dans le fichier 
+
+Préparation des données d'entrée :
+
+    Le script prend en entrée un fichier contenant une liste de titres de pages Wikipédia.
+    Il élimine les doublons avec sort -u et garde uniquement les lignes contenant des caractères alphanumériques avec grep. Le fichier nettoyé est sauvegardé sous le nom fichier.uniq.
+
+Division en morceaux (chunks) :
+
+    La liste des pages est divisée en petits fichiers de 3000 lignes maximum avec la commande split. Chaque chunk représente un lot de pages à traiter.
+
+Encodage des titres :
+
+    Les titres de pages sont encodés en URL via un script Python pour être compatibles avec une requête HTTP. Par exemple, "Category:Biology" devient "Category%3ABiology".
+
+Téléchargement des pages :
+
+    Pour chaque chunk, les titres encodés sont envoyés à l'outil Special:Export de Wikipédia via une requête POST avec curl. Les paramètres importants sont :
+        pages : La liste des pages à exporter.
+        curonly=1 : Exporte uniquement la version actuelle des pages.
+        wpDownload=1 : Demande un fichier téléchargeable.
+    Le contenu exporté est sauvegardé dans le dossier dws sous forme compressée (.gz), puis décompressé.
+
+Nettoyage :
+
+    Après traitement, le script supprime les fichiers temporaires (*.chunks, fichier.uniq, etc.).
+=========================================================================================================
+    Caractéristiques du crawling :
+
+    Profondeur : Le script ne gère pas directement la profondeur, il se limite aux pages données dans le 
+    fichier d'entrée.
+    Étendue : Les pages sont traitées par lots de 3000, pour éviter de surcharger l'outil d'exportation.
+    Automatisation : Le crawling repose sur la liste d'entrée et ne découvre pas automatiquement de
+    nouvelles pages ou sous-catégories. Pour explorer dynamiquement des sous-catégories, une logique 
+    de récursivité similaire au script Python présenté précédemment serait nécessaire.
+=========================================================================================================
+q3.4 - XML >doc> https://en.wikipedia.org/w/api.php
+
+POur exacuter le fichier dw.sh > il faut donner les permissions : chmod +777 dw.sh
+
+*=========================================================================================================*
+**********************
+***parsing the data***
+**********************
+
+q4.1 - tok-doc (doctok),   > c'est un dictionniaire : <class 'dict'> via type(doctok)
+       links, > defaultdict(<class 'dict'>, {})   (https://www.geeksforgeeks.org/defaultdict-in-python/)
+        
+        *Matrice Tok-Doc (doctok) :
+        Type d’objet Python : Un dictionnaire (dict).
+        Structure :
+            Les clés représentent les titres des documents (chaînes de caractères).
+            Les valeurs sont des listes de tokens (mots) présents dans chaque document.
+        ----------------------------------------------------------------------------------
+
+        *Matrice des sauts (links) :
+        Type d’objet Python : Un dictionnaire (dict).
+        Structure :
+            Les clés représentent les titres des documents (chaînes de caractères).
+            Les valeurs sont des listes des titres des documents auxquels le document 
+            clé fait référence via des liens internes.
+        ----------------------------------------------------------------------------------
+        *type encodage :  sparse representation
+
+q4.2 - les lien sont encodé sous format Wiki markup[ '[]]' >>> https://www.mediawiki.org/wiki/API:Main_page
+q4.3 - lien externe : cleanExtLinks = r"\*\[([^\|\]]+)\s([^\]]+)\]" >>> *[https:... texte avecdes espace] 
+ 
+q4.3 - il faut recuperer tout les mots de type wiki markup "[[]]". Les liens commencent par toujours par '[['
+et se termine par ']]'. Les liens contiennent aussi à l'intérieur ':' et '|'.  par definition, le format des lien est 
+[[line |text d'affichage ]] - >>>   \[\[ ([^\|\]]+) \| ([^\]\[]+)\]\] ou  \[\[([^\]\[]+)\]\] pour le lien simple (sans texte d'affichage)
+
+
