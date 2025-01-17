@@ -1,23 +1,66 @@
+
 # Woogle: Mini Wiki Search Engine
 
-## Introduction
+## Project Overview
 
-**Woogle** est un moteur de recherche minimaliste conçu pour explorer et indexer des documents à partir de sources Wikimedia, en utilisant des techniques classiques d'**Information Retrieval** (IR). Ce projet fait partie d'une session pratique dans le cadre du cours de Recherche d'Information, et il vise à construire un moteur de recherche efficace et optimisé pour les pages Wikipedia.
+Woogle is a basic search engine designed to mine and rank Wikipedia documents based on user queries. It involves crawling Wikipedia data, processing and parsing the content, and ranking the documents using standard Information Retrieval techniques, such as PageRank and vector space models. The project aims to provide hands-on experience in building a search engine, while implementing essential algorithms and techniques in the field of Information Retrieval.
 
-Le but principal de ce projet est de permettre aux utilisateurs de rechercher des documents Wikipédia pertinents en utilisant des modèles vectoriels et l'algorithme **PageRank**, tout en expérimentant diverses techniques pour améliorer la qualité et la pertinence des résultats.
+## Installation
 
-## Objectifs du projet
-
-- Collecter des pages à partir de Wikipedia via leur API.
-- Traiter et analyser les données collectées pour en extraire des informations utiles.
-- Implémenter l'algorithme **PageRank** pour évaluer l'importance des pages.
-- Mettre en œuvre un modèle vectoriel pour effectuer des recherches dans les pages collectées.
-- Explorer des améliorations possibles, telles que le **stemming**, la **sémantique latente**, ou l'usage d'**embeddings** pour améliorer la recherche.
-
-## Prérequis
-
-### Python Modules
-Pour exécuter ce projet, tu auras besoin de certains modules Python. Si ces modules ne sont pas déjà installés sur ton système, tu peux les installer en utilisant la commande suivante :
+To set up the project, clone the Git repository:
 
 ```bash
-pip3 install --user -r requirements.txt
+git clone https://gitlab.ensimag.fr/galiezc/wikisearchengineproject.git
+```
+
+Once you have cloned the repository, navigate to the project directory and make sure the dependencies are installed. You may need to install the following Python modules:
+
+```bash
+pip3 install --user numpy httplib2
+```
+
+## Files and Directories
+
+The project directory contains several files and subdirectories, each serving a specific purpose:
+
+- **capture/**: Contains logs and other output generated during crawling.
+- **crawl.py**: Script that collects Wikipedia pages from a given category.
+- **dw.sh**: Bash script used to download pages listed in `wiki.lst`.
+- **dws/**: Directory where downloaded Wikipedia pages are stored.
+- **search.py**: Main script for querying the Wikipedia dataset and ranking pages.
+- **parsexml.py**: Python script that parses downloaded Wikipedia XML data and creates document-term matrices.
+- **pageRank.py**: Script implementing the PageRank algorithm for ranking the Wikipedia pages.
+- **wiki.lst**: List of pages to be downloaded from Wikipedia.
+- **tfidf.dict, links.dict, tokInfo.dict, pageRank.dict**: Files storing pre-processed data related to term frequency, document links, and PageRank.
+- **links.txt, questions.txt**: Text files that may contain sample queries or metadata.
+- **tpWikiSearchEngine.pdf**: PDF document providing project details and instructions.
+
+## Project Objective
+
+The goal of this project is to build a basic search engine that mines and ranks Wikipedia documents based on their relevance to user queries. The main objectives are:
+
+1. **Crawling Wikipedia Data**: Use the Wikipedia API to collect pages from a specified category.
+2. **Parsing and Processing**: Parse raw data, clean it, and create a term-document matrix for text analysis.
+3. **Ranking Pages**: Implement algorithms like PageRank and the vector space model to rank Wikipedia pages based on query relevance.
+4. **Search Interface**: Develop a search function that allows users to query the dataset and return ranked results.
+
+## How to Run
+
+Follow these steps to run the project:
+
+1. Clone the repository and install the required dependencies.
+2. Use the provided scripts to crawl Wikipedia data:
+   - Run `python3 crawl.py` to collect the list of pages.
+   - Execute the `dw.sh` script to download the data in batches.
+3. Parse the downloaded data with `python3 parsexml.py`.
+4. Run the search engine with `python3 search.py` to test queries.
+
+### Example Command
+
+To search for "evolution of bacteria", run the following command:
+
+```bash
+python3 search.py "evolution of bacteria"
+```
+
+This will return the top 15 results ranked using the vector model.
