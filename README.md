@@ -1,7 +1,7 @@
 
-# Woogle: Mini Wiki Search Engine
+# Woogle: Mini wiki search engine
 
-## Project Overview
+## Project overview
 
 Woogle is a basic search engine designed to mine and rank Wikipedia documents based on user queries. It involves crawling Wikipedia data, processing and parsing the content, and ranking the documents using standard Information Retrieval techniques, such as PageRank and vector space models. The project aims to provide hands-on experience in building a search engine, while implementing essential algorithms and techniques in the field of Information Retrieval.
 
@@ -19,7 +19,7 @@ Once you have cloned the repository, navigate to the project directory and make 
 pip3 install --user numpy httplib2
 ```
 
-## Files and Directories
+## Files and directories
 
 The project directory contains several files and subdirectories, each serving a specific purpose:
 
@@ -34,7 +34,7 @@ The project directory contains several files and subdirectories, each serving a 
 - **tfidf.dict, links.dict, tokInfo.dict, pageRank.dict**: Files storing pre-processed data related to term frequency, document links, and PageRank.
 - **tpWikiSearchEngine.pdf**: PDF document providing project details and instructions.
 
-## Project Objective
+## Project objective
 
 The goal of this project is to build a basic search engine that mines and ranks Wikipedia documents based on their relevance to user queries. The main objectives are:
 
@@ -43,7 +43,7 @@ The goal of this project is to build a basic search engine that mines and ranks 
 3. **Ranking Pages**: Implement algorithms like PageRank and the vector space model to rank Wikipedia pages based on query relevance.
 4. **Search Interface**: Develop a search function that allows users to query the dataset and return ranked results.
 
-## How to Run
+## How to run
 
 Follow these steps to run the project:
 
