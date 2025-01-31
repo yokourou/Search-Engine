@@ -8,7 +8,7 @@ Woogle is a basic search engine designed to mine and rank Wikipedia documents ba
 
 
 
-<img src="webcrawler .png" alt="" width="150"/>
+<img src="webcrawler .png" alt="" width="200"/>
 
 
 ## Installation
