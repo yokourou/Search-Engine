@@ -4,7 +4,7 @@
 ## Project overview
 
 Woogle is a basic search engine designed to mine and rank Wikipedia documents based on user queries. It involves crawling Wikipedia data, processing and parsing the content, and ranking the documents using standard Information Retrieval techniques, such as PageRank and vector space models. The project aims to provide hands-on experience in building a search engine, while implementing essential algorithms and techniques in the field of Information Retrieval.
-<img src="webcrawler.png" alt="Python" width="50"/>
+<img src="webcrawler .png" alt="" width="50"/>
 
 
 ## Installation
