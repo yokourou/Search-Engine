@@ -38,7 +38,6 @@ The project directory contains several files and subdirectories, each serving a 
 - **pageRank.py**: Script implementing the PageRank algorithm for ranking the Wikipedia pages.
 - **wiki.lst**: List of pages to be downloaded from Wikipedia.
 - **tfidf.dict, links.dict, tokInfo.dict, pageRank.dict**: Files storing pre-processed data related to term frequency, document links, and PageRank.
-- **tpWikiSearchEngine.pdf**: PDF document providing project details and instructions.
 
 ## Project objective
 
